@@ -12,6 +12,8 @@ class ImageProcess {
   public:
     ImageProcess();
     ImageProcess(int& length, double& blockSize);
+    void readFile();
+    void preprocess();
     void cellDetect();
     string getImageName();
     void setImageName(string imageName);
