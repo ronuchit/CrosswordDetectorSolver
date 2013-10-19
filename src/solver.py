@@ -19,7 +19,7 @@ class Solver(object):
     for c in self.clues:
       if len(c.word_list) > 1:
         self.longer_clues.append(c)
-      elif c.word_list == 0:
+      elif len(c.word_list) == 0:
         print("No answers for clue %s; ignoring"%c.clue_str)
         self.num_remaining -= 1
     
@@ -28,21 +28,23 @@ class Solver(object):
     if len(self.longer_clues) > 0:
       self._solve()
 
-  def _solve(self):
-    for i, clue in enumerate(self.longer_clues):
+  def _solve(self, words=[]):
+    if len(self.longer_clues) > 0:
+      clue = self.longer_clues[0]
       for word in clue.word_list:
         try:
           if self.place_letters(clue.coord.x, clue.coord.y, word, clue.direction):
-            return
+            return True          
         except board.InvalidLetterException:
-          pass
-        
-        del self.longer_clues[i]
+          continue
+        del self.longer_clues[0]
         try:
-          self._solve()
+          if self._solve(words+[word]):
+            return True
         except SolverFailedError:
           pass
-        self.longer_clues.insert(i, clue)
+        self.longer_clues.insert(0, clue)
+        self.unplace_letters(clue.coord.x, clue.coord.y, word, clue.direction)
     raise SolverFailedError("No solution found!")
 
   def fill_guarantees(self):
@@ -75,6 +77,16 @@ class Solver(object):
       print("Solution found!")
       return True
     return False
+
+  def unplace_letters(self, c_x, c_y, word, direction):
+    x, y = c_x, c_y
+    for i in range(len(word)):
+      self.board_repr[x, y].set_letter(self.board_repr[x, y].prev_letter)
+      if direction == board.Board.DOWN:
+        x += 1
+      else:
+        y += 1
+    self.num_remaining += 1
 
   def check_length_validity(self, req_len, word):
     if req_len != len(word):
