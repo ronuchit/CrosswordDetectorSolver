@@ -22,6 +22,7 @@ class Solver(object):
       elif len(c.word_list) == 0:
         print("No answers for clue %s; ignoring"%c.clue_str)
         self.num_remaining -= 1
+    self.index = 0
     
   def solve(self):
     self.fill_guarantees()
@@ -30,21 +31,21 @@ class Solver(object):
 
   def _solve(self, words=[]):
     if len(self.longer_clues) > 0:
-      clue = self.longer_clues[0]
+      clue = self.longer_clues[self.index]
       for word in clue.word_list:
         try:
           if self.place_letters(clue.coord.x, clue.coord.y, word, clue.direction):
-            return True          
+            return True
         except board.InvalidLetterException:
           continue
-        del self.longer_clues[0]
+        self.index += 1
         try:
           if self._solve(words+[word]):
             return True
         except SolverFailedError:
           pass
-        self.longer_clues.insert(0, clue)
-        self.unplace_letters(clue.coord.x, clue.coord.y, word, clue.direction)
+        self.index -= 1
+        self.unplace_letters(clue.coord.x, clue.coord.y, word, clue.direction, words)
     raise SolverFailedError("No solution found!")
 
   def fill_guarantees(self):
@@ -66,8 +67,19 @@ class Solver(object):
 
   def place_letters(self, c_x, c_y, word, direction):
     x, y = c_x, c_y
+    old_letters = []
     for i in range(len(word)):
-      self.board_repr[x, y].set_letter(word[i])
+      try:
+        old_letters.append(self.board_repr[x, y].letter)
+        self.board_repr[x, y].set_letter(word[i])
+      except board.InvalidLetterException as e:
+        if direction == board.Board.DOWN:
+          for corr_x in range(c_x, x):
+            self.board_repr[corr_x, y].set_letter(old_letters[corr_x - c_x])
+        else:
+          for corr_y in range(c_y, y):
+            self.board_repr[x, corr_y].set_letter(old_letters[corr_y - c_y])
+        raise e
       if direction == board.Board.DOWN:
         x += 1
       else:
@@ -78,13 +90,16 @@ class Solver(object):
       return True
     return False
 
-  def unplace_letters(self, c_x, c_y, word, direction):
+  def unplace_letters(self, c_x, c_y, word, direction, words):
     x, y = c_x, c_y
     for i in range(len(word)):
-      self.board_repr[x, y].set_letter(self.board_repr[x, y].prev_letter)
       if direction == board.Board.DOWN:
+        if (y == 0 or self.board_repr[x, y-1].letter is None) and (y == np.shape(self.board_repr)[0] - 1 or self.board_repr[x, y+1].letter is None):
+          self.board_repr[x, y].set_letter(None)
         x += 1
       else:
+        if (x == 0 or self.board_repr[x-1, y].letter is None) and (x == np.shape(self.board_repr)[0] - 1 or self.board_repr[x+1, y].letter is None):
+          self.board_repr[x, y].set_letter(None)
         y += 1
     self.num_remaining += 1
 

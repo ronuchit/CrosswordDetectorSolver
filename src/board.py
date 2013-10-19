@@ -96,13 +96,11 @@ class Block(object):
     self.color = color
     self.right_length = right_length
     self.down_length = down_length
-    self.prev_letter = None
     self.letter = None
 
   def set_letter(self, letter):
     if letter is not None and self.letter is not None and self.letter != letter:
       raise InvalidLetterException
-    self.prev_letter = self.letter
     self.letter = letter
     
   def __repr__(self):
