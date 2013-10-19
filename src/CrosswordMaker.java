@@ -115,6 +115,9 @@ class Letters extends JPanel {
         System.out.println(letter.size());
         for (int i = 0; i < letter.size(); i++) {
             squares[x_axis.get(i) / 20][ y_axis.get(i) / 20] = 1;
+	    if(letter.get(i) == "None"){
+		continue;
+	    }
             g.setColor(Color.RED);
             g2.drawString(letter.get(i), x_axis.get(i) + 2, y_axis.get(i) + 20);
             g.setColor(Color.BLACK);
