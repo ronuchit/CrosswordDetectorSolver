@@ -20,9 +20,9 @@ class Executor(object):
     # clue11 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(1,0), '"__ was saying..." (2 wds.)')
     clue12 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(1,4), "Teens' heroes")
     # clue14 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(1,10), "Candidate, for short")
-    clue15 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(2,0), "Opposite of masc.")
+    # clue15 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(2,0), "Opposite of masc.")
     # clue16 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(2,4), "Arranged in rows and columns")
-    # clue18 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(3,2), "Promissory Note")
+    clue18 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(3,2), "Promissory Note")
     # clue20 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(3,6), "Coal Bed")
     # clue21 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(4,1), "Make suitable")
     # clue23 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(4,8), "Is concerned")
@@ -51,7 +51,7 @@ class Executor(object):
     clue1d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,0), "Lout")
     clue2d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,1), "Application")
     # clue3d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,2), "Shyness")
-    # clue4d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,4), "Illuminated (2 wds.)")
+    clue4d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,4), "Illuminated (2 wds.)")
     # clue5d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,5), "Boise's state (abbr.)")
     # clue6d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,6), "Throngs")
     # clue7d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,7), '"__ Skies"')
@@ -86,7 +86,8 @@ class Executor(object):
     #   clue27, clue28, clue31, clue32, clue33, clue34, clue35, clue36, clue37, clue38, clue40, clue42, clue45, clue46, clue50,
     #   clue53, clue54, clue55, clue56, clue57, clue58, clue1d, clue2d, clue4d, clue5d, clue6d, clue7d, clue8d, clue9d, clue10d,
     #   clue13d]
-    clues = [clue1, clue4, clue8, clue12, clue15, clue1d, clue2d]
+    # clues = [clue1, clue4, clue8, clue12, clue15, clue18, clue1d, clue2d, clue4d]
+    clues = [clue1, clue4, clue8, clue12, clue18, clue1d, clue2d, clue4d][::-1]
     scraper.Scraper().run_scraper(clues, self.b.board)
     #solver.Solver(self.b.board, [c1, c2]).solve()
     #self.produce_output()
