@@ -56,9 +56,9 @@ void ImageProcess::cellDetect() {
       float gAvg = g / numSamples;
       float bAvg = b / numSamples;
       if (rAvg < MAX_R && gAvg < MAX_G && bAvg < MAX_B) {
-        myFile << x << " " << y << " " << 0 << endl;
+        myFile << y << " " << x << " " << 0 << endl;
       } else {
-        myFile << x << " " << y << " " << 1 << endl;
+        myFile << y << " " << x << " " << 1 << endl;
       }
       x++;
     }
