@@ -70,22 +70,24 @@ class Executor(object):
     clue29d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(5,6), "Increase the number")
     clue30d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(5,7), "Passable grades")
     clue33d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(6,4), "Declare to be true")
-    clue37d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(6,10), "Prior to (prefix)")
-    clue39d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(7,3), "Liverpool's locale (abbr.)")
-    clue41d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(7,8), "Griffith and Rooney")
-    clue43d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(8,5), 'Jack of "Dragnet"')
-    clue44d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(8,6), "Actor Donahue")
-    clue46d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(9,0), "Tricky")
-    clue47d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(9,1), "One __ customer (2 wds.)")
-    clue48d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(9,2), "Modern bank teller (abbr.)")
-    clue49d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(9,7), "WSW's opp.")
-    clue51d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(9,11), "Alias initials")
-    clue52d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(9,12), "Sleep stage (abbr.)")
+    clue37d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(7,9), "Prior to (prefix)")
+    clue39d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(8,3), "Liverpool's locale (abbr.)")
+    clue41d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(8,8), "Griffith and Rooney")
+    clue43d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(9,5), 'Jack of "Dragnet"')
+    clue44d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(9,6), "Actor Donahue")
+    clue46d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(10,0), "Tricky")
+    clue47d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(10,1), "One __ customer (2 wds.)")
+    clue48d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(10,2), "Modern bank teller (abbr.)")
+    clue49d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(10,7), "WSW's opp.")
+    clue51d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(10,11), "Alias initials")
+    clue52d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(10,12), "Sleep stage (abbr.)")
 
     scraper.Scraper().run_scraper([clue1, clue4, clue8, clue11, clue12, clue14, clue15, clue16, clue18, clue20, clue21, clue23,
       clue27, clue28, clue31, clue32, clue33, clue34, clue35, clue36, clue37, clue38, clue40, clue42, clue45, clue46, clue50,
       clue53, clue54, clue55, clue56, clue57, clue58, clue1d, clue2d, clue4d, clue5d, clue6d, clue7d, clue8d, clue9d, clue10d,
-      clue13d], self.b.board)
+      clue13d, clue17d, clue19d, clue21d, clue22d, clue24d, clue25d, clue26d, clue27d, clue29d, clue30d, clue33d, clue37d, clue39d,
+      clue41d, clue43d, clue44d, clue46d, clue47d, clue48d, clue49d, clue51d, clue52d], self.b.board)
+    
     #solver.Solver(self.b.board, [c1, c2]).solve()
     #self.produce_output()
     # scraper.Scraper().run_scraper([clue1, clue2, clue3, clue4], self.b.board)

@@ -22,6 +22,7 @@ class Scraper(object):
 		and value a list (without repetitions) of possible answers of length equal
 		to length that is provided to the function"""
 		original_clue = clue
+		print(original_clue.clue_str)
 		clue = self.check_clue(clue)
 		stuff_to_check = []
 		#get html from crosswordnexus.com
