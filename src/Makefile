@@ -23,3 +23,6 @@ clean:
 
 delete:
 	$(RM) *.out
+
+preprocess: main.o
+	$(CC) $(LDFLAGS) -o $(TARGET) $^ $(LIBRARIES)

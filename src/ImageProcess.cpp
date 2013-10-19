@@ -1,61 +1,46 @@
 #include "ImageProcess.h"
+#include <vector>
 
 #define MAX_R 150
 #define MAX_G 150 
 #define MAX_B 150
-#define MIN_W 10
-#define MIN_H 10
-#define X_INC 45
-#define Y_INC 45
-#define X_BOX_INC 5
-#define Y_BOX_INC 5
 
 ImageProcess::ImageProcess() {
-  this->numSamples = (X_INC * Y_INC) / (X_BOX_INC * Y_BOX_INC);
-}
-
-ImageProcess::ImageProcess(int& length, double& blockSize) {
-  this->length = length;
-  this->blockSize = blockSize;
-  this->numSamples = (X_INC * Y_INC) / (X_BOX_INC * Y_BOX_INC);
 }
 
 int main() {
-  int length = 13;
-  double blockSize = 45;
-  ImageProcess ip = ImageProcess(length, blockSize);
+  ImageProcess ip = ImageProcess();
   ip.cellDetect();
 }
 
 void ImageProcess::cellDetect() {
-  CImg<unsigned char> src("../images/test1.jpg");
+  string fname = "../temp/puzzle_info.txt";
+  ifstream infile;
+  string temp;
+  infile.open(fname.c_str());
+  getline(infile, temp);
+  setImageName(temp.c_str());
+  getline(infile, temp);
+  setNumBlocks(atoi(temp.c_str()));
+  string srcName = "../images/" + getImageName();
+  CImg<unsigned char> src(srcName.c_str());
   src.blur(15);
   int y = 0;
   ofstream myFile;
   int width = src.width();
   int height = src.height();
   myFile.open("../temp/color_info.txt");
+  double blockPixels = width / getNumBlocks();
+  double min_h = blockPixels / 2;
+  double min_w = blockPixels / 2;
   // loop through each supposed "BOX"
-  for(int j = MIN_H; j < height; j+=Y_INC) {
+  for(int j = min_h; j < height; j+=blockPixels) {
     int x = 0;
-    for(int i = MIN_W; i < width; i+=X_INC) {
-      int r = 0;
-      int g = 0;
-      int b = 0;
-      // loop through a box and determine the average of colors along a portion of 
-      // width and height
-      for(int l = 0; l < Y_INC; l += Y_BOX_INC) {
-        for(int k = 0; k < X_INC; k += X_BOX_INC ) {
-          // 0 1 2 correspond to RGB colors in () operators
-          r += src(i + l, j + k, 0, 0);
-          g += src(i + l, j + k, 0, 1);
-          b += src(i + l, j + k, 0, 2);
-        }
-      }
-      float rAvg = r / numSamples;
-      float gAvg = g / numSamples;
-      float bAvg = b / numSamples;
-      if (rAvg < MAX_R && gAvg < MAX_G && bAvg < MAX_B) {
+    for(int i = min_w; i < width; i+=blockPixels) {
+      int r = src(i, j, 0, 0);
+      int g = src(i, j, 0, 1);
+      int b = src(i, j, 0, 2);
+      if (r < MAX_R && g < MAX_G && b < MAX_B) {
         myFile << y << " " << x << " " << 0 << endl;
       } else {
         myFile << y << " " << x << " " << 1 << endl;
@@ -65,4 +50,20 @@ void ImageProcess::cellDetect() {
     y++;
   }
   myFile.close();
+}
+
+string ImageProcess::getImageName() {
+  return this->imageName;
+}
+
+void ImageProcess::setImageName(string imageName) {
+  this->imageName = imageName;
+}
+
+int ImageProcess::getNumBlocks() {
+  return this->numBlocks;
+}
+
+void ImageProcess::setNumBlocks(int numBlocks) {
+  this->numBlocks = numBlocks;
 }
