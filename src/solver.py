@@ -23,7 +23,7 @@ class Solver(object):
       if len(clue.word_list) == 1:
         word = clue.word_list[0]
         c_x, c_y = clue.coord.x, clue.coord.y
-        if clue.direction == board.Board.RIGHT:
+        if clue.direction == board.Board.ACROSS:
           length = self.board_repr[c_x, c_y].right_length
         else:
           length = self.board_repr[c_x, c_y].down_length
@@ -51,7 +51,7 @@ if __name__ == "__main__":
   color_arr = np.array([[1, 1, 1, 0, 0], [1, 1, 1, 0, 1], [1, 1, 1, 0, 1], [1, 1, 1, 1, 1], [0, 0, 0, 1, 1]])
   b = board.Board(color_arr)
   b.construct_board()
-  c1 = clue.Clue(board.Board.RIGHT, coordinate.Coordinate(0, 0), "whe")
+  c1 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(0, 0), "whe")
   c1.word_list = ["hey"]
   c2 = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0, 0), "whe2")
   c2.word_list = ["gist"]

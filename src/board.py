@@ -11,7 +11,7 @@ class InvalidLetterException(Exception):
 class Board(object):
   BLACK = 0
   WHITE = 1
-  RIGHT = 0
+  ACROSS = 0
   DOWN = 1
   def __init__(self, color_arr):
     self.color_arr = color_arr

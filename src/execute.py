@@ -13,15 +13,15 @@ class Executor(object):
   def create_color_array(self):
     with open("color_info.txt", "r+") as f:
       lines = f.readlines()
-    color_array = np.array([sqrt(len(lines)), sqrt(len(lines))], dtype=int)
+    color_array = np.empty([sqrt(len(lines)), sqrt(len(lines))], dtype=int)
     for line in lines:
-      row, column, color = line.split
+      row, column, color = line.split()
       color_array[int(row), int(column)] = color
+      
+    return color_array
 
   def execute(self):
-    b = board.Board(color).construct_board()
-    
-    
+    b = board.Board(self.color_array)
 
 if __name__ == "__main__":
   Executor().execute()
