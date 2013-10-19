@@ -14,13 +14,13 @@ class Executor(object):
     self.b = board.Board(self.color_array)
 
   def execute(self):
-    clue1 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(0,0), "Ump's call")
-    clue4 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(0,4), "Branch")
-    clue8 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(0,10), "From __ Z (2 wds.)")
+    #clue1 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(0,0), "Ump's call")
+    #clue4 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(0,4), "Branch")
+    #clue8 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(0,10), "From __ Z (2 wds.)")
     # clue11 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(1,0), '"__ was saying..." (2 wds.)')
     # clue12 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(1,4), "Teens' heroes")
     # clue14 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(1,10), "Candidate, for short")
-    clue15 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(2,0), "Opposite of masc.")
+    #clue15 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(2,0), "Opposite of masc.")
     # clue16 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(2,4), "Arranged in rows and columns")
     # clue18 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(3,2), "Promissory Note")
     # clue20 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(3,6), "Coal Bed")
@@ -48,9 +48,9 @@ class Executor(object):
     # clue57 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(12,5), "Farewells")
     # clue58 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(12,10), "U.S.A.'s 'Uncle'")
 
-    clue1d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,0), "Lout")
-    clue2d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,1), "Application")
-    clue3d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,2), "Shyness")
+    #clue1d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,0), "Lout")
+    #clue2d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,1), "Application")
+    #clue3d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,2), "Shyness")
     # clue4d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,4), "Illuminated (2 wds.)")
     # clue5d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,5), "Boise's state (abbr.)")
     # clue6d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,6), "Throngs")
@@ -86,7 +86,19 @@ class Executor(object):
     #   clue27, clue28, clue31, clue32, clue33, clue34, clue35, clue36, clue37, clue38, clue40, clue42, clue45, clue46, clue50,
     #   clue53, clue54, clue55, clue56, clue57, clue58, clue1d, clue2d, clue4d, clue5d, clue6d, clue7d, clue8d, clue9d, clue10d,
     #   clue13d]
-    clues = [clue1, clue4, clue8, clue15, clue1d, clue2d, clue3d]
+    clue1 = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,10), "Hawaiian souvenir")
+    clue2 = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,11), "Chicago trains")
+    clue3 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(1,9), "Soccer legend")
+    clue4 = clue.Clue(board.Board.DOWN, coordinate.Coordinate(2,8), "Circle segment")
+    clue5 = clue.Clue(board.Board.DOWN, coordinate.Coordinate(1,9), "Implore")
+    clue6 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(3,7), "Mine find")
+    clue7 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(4, 8), '"Cheers" waitress')
+    clue8 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(5, 9), "Regard")
+    clue9 = clue.Clue(board.Board.DOWN, coordinate.Coordinate(4,11), "Renting contract")
+    clue10 = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,7), "Toast topping")
+    clue11 = clue.Clue(board.Board.DOWN, coordinate.Coordinate(4,12), "Stockpile")
+    clue12 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(0,5), '"Which guy?"')
+    clues = [clue1, clue2, clue3, clue4, clue5, clue6, clue7, clue8, clue9, clue10, clue11, clue12]
     scraper.Scraper().run_scraper(clues, self.b.board)
     #solver.Solver(self.b.board, [c1, c2]).solve()
     #self.produce_output()
