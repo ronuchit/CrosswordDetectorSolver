@@ -70,10 +70,16 @@ class Scraper(object):
 			i = 0;
 			while (i < len(stuff)):
 				data = stuff[i].contents[0]
-				if (len(data)==length):
+				if (len(data)==length | len(data)==(length-1)):
 					if (regex.match(data)):
 						if (data not in toReturn):
-							toReturn.append(data)
+							if clue[-1] == 's':
+								if (len(data)==length-1):
+									toReturn.append(data+"s")
+								else:
+									toReturn.append(data)
+							elif (len(data)==length):
+								toReturn.append(data)
 				i = i + 1
 		original_clue.word_list = toReturn
 		print(toReturn)
