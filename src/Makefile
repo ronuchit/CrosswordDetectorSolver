@@ -1,6 +1,6 @@
 CC = g++
-CFLAGS= -g -Wall -std=c++11 -I. -I./X11
-LDFLAGS= -g -Wall -std=c++11
+CFLAGS= -g -Wall -I. -I./X11
+LDFLAGS= -g -Wall
 
 #Libraries
 CCOPTS = -c
@@ -17,7 +17,7 @@ main: ImageProcess.o
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
-	
+
 clean:
 	$(RM) *.o $(TARGET)
 

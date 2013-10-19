@@ -5,9 +5,14 @@
 import numpy as np
 import coordinate
 
+class InvalidLetterException(Exception):
+  pass
+
 class Board(object):
   BLACK = 0
   WHITE = 1
+  RIGHT = 0
+  DOWN = 1
   def __init__(self, color_arr):
     self.color_arr = color_arr
     self.side_length = np.shape(self.color_arr)[0]
@@ -22,7 +27,7 @@ class Board(object):
     
     for row in range(self.side_length):
       for column in range(self.side_length):
-        if color_arr[row, column] == Board.BLACK:
+        if self.color_arr[row, column] == Board.BLACK:
           board[row, column] = Block(Board.BLACK, right_length=None, down_length=None)
         elif (row == 0 and column == 0) or \
               (board[row-1, column] is not None and \
@@ -85,9 +90,15 @@ class Block(object):
     self.right_length = right_length
     self.down_length = down_length
     self.letter = None
-              
+
+  def set_letter(self, letter):
+    if self.letter is not None and self.letter != letter:
+      raise InvalidLetterException
+    self.letter = letter
+    
   def __repr__(self):
-    return "color: %s; right_length: %s; down_length: %s"%(self.color, str(self.right_length), str(self.down_length))
+    return "color: %s; right_length: %s; down_length: %s; letter: %s" \
+        %(self.color, str(self.right_length), str(self.down_length), str(self.letter))
 
 if __name__ == "__main__":
   color_arr = np.array([[1, 1, 1, 0, 0], [1, 1, 1, 0, 1], [1, 1, 1, 0, 1], [1, 1, 1, 1, 1], [0, 0, 0, 1, 1]])

@@ -34,7 +34,7 @@ void ImageProcess::cellDetect() {
   ofstream myFile;
   int width = src.width();
   int height = src.height();
-  myFile.open("puzzle_shape_info.txt");
+  myFile.open("color_info.txt");
   // loop through each supposed "BOX"
   for(int j = MIN_H; j < height; j+=Y_INC) {
     int x = 0;
