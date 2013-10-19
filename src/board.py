@@ -30,10 +30,17 @@ class Board(object):
         if self.color_arr[row, column] == Board.BLACK:
           board[row, column] = Block(Board.BLACK, right_length=None, down_length=None)
         elif (row == 0 and column == 0) or \
-              (board[row-1, column] is not None and \
-                 board[row-1, column].color == Board.BLACK and \
-                 board[row, column-1] is not None and \
-                 board[row, column-1].color == Board.BLACK):
+             (row == 0 and \
+                board[row, column-1] is not None and \
+                board[row, column-1].color == Board.BLACK) or \
+             (column == 0 and \
+                board[row-1, column] is not None and \
+                board[row-1, column].color == Board.BLACK) or \
+             (board[row-1, column] is not None and \
+                board[row-1, column].color == Board.BLACK and \
+                board[row, column-1] is not None and \
+                board[row, column-1].color == Board.BLACK):
+              
           numbers_dict[curr_num] = coordinate.Coordinate(row, column)
           curr_num += 1
           board[row, column] = self._construct_beginning_block(row, column, do_right=True, do_down=True)
