@@ -2,7 +2,7 @@
 import clue
 import re
 
-def parse():
+def parse(board):
   with open('clues.txt', 'r') as f:
     temp = f.read()
     numbers = re.findall("\d*?\.", temp);
@@ -32,7 +32,8 @@ def parse():
       clues2 = clues2[0:start_of_down+1] + clues2[(start_of_down+1):]
       break
     i = i + 1
-  changeClues(numbers, clues2)
+  # changeClues(numbers, clues2)
+  return make_clues(clues2, numbers, start_of_down, board)
 
 def changeClues(x,y):
   change = True;
@@ -53,10 +54,17 @@ def changeClues(x,y):
       change = False
       return x
 
-def make_clues(str_list, num_list, down_start):
+def make_clues(str_list, num_list, down_start, board):
+  num_list = map(lambda x: x[:-1], num_list)
   toReturn = []
-  for clue in x[0:down_start]:
-    toReturn.append(clue.Clue(board.Board.ACROSS, )
+  across_lst = [13, 19, 24, 30, 37, 41]
+  down_lst = [6, 7, 8, 13, 16, 26, 27]
+  for i in range(len(str_list)):
+    if i < down_start and int(num_list[i]) in across_lst:
+      toReturn.append(clue.Clue(board.ACROSS, board.numbers_dict[int(num_list[i])], str_list[i]))
+    elif i >= down_start and int(num_list[i]) in down_lst:
+      toReturn.append(clue.Clue(board.DOWN, board.numbers_dict[int(num_list[i])], str_list[i]))
+  return toReturn
 
 if __name__ == "__main__": 
   parse()

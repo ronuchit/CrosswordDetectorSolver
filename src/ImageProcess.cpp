@@ -100,7 +100,6 @@ void ImageProcess::preprocess() {
     y++;
   }
   myFile.close();
-  cout << numblacksquares;
 }
 
 void ImageProcess::cellDetect() {
@@ -144,7 +143,6 @@ void ImageProcess::cellDetect() {
     y++;
   }
   myFile.close();
-  cout << numblacksquares << endl;
 }
 
 string ImageProcess::getImageName() {

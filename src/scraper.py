@@ -11,6 +11,8 @@ import numpy
 class Scraper(object):
 	def run_scraper(self, clues, board):
 		for c in clues:
+                        if "DOWN" in c.clue_str:
+                          continue
 			if c.direction == Board.ACROSS:
 				l = board[c.coord.x, c.coord.y].right_length
 			if c.direction == Board.DOWN:
