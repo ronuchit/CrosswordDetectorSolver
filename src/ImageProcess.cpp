@@ -4,12 +4,18 @@
 #define MAX_R 150
 #define MAX_G 150 
 #define MAX_B 150
+#define MIN_R 100
+#define MIN_G 100
+#define MIN_B 100
+#define Y_BOX_INC 5
+#define X_BOX_INC 5
 
 ImageProcess::ImageProcess() {
 }
 
 int main() {
   ImageProcess ip = ImageProcess();
+  ip.preprocess();
   ip.readFile();
   ip.cellDetect();
 }
@@ -26,15 +32,25 @@ void ImageProcess::readFile() {
 }
 
 void ImageProcess::preprocess() {
-CImg<unsigned char> src("../images/photo.jpg");
+  CImg<unsigned char> backup("../images/test3.jpg");
+  backup.save("../images/test2.jpg");
+  CImg<unsigned char> src("../images/test2.jpg");
+  src.save("../images/test3.jpg");
   int r = 0;
   int g = 0;
   int b = 0;
+  // unneeded for now
+  //int r_prev = 0;
+  //int g_prev = 0;
+  //int b_prev = 0;
   cimg_forXY(src, i, j) {
+    //r_prev = r;
+    //g_prev = g;
+    //b_prev = b;
     r = src(i, j, 0, 0);
     g = src(i, j, 0, 1);
     b = src(i, j, 0, 2);
-    if (r < MAX_R && g < MAX_G && b < MAX_B) {
+    if (r < MIN_R && g < MIN_G && b < MIN_B) {
       src(i, j, 0) = 0;
       src(i, j, 1) = 0;
       src(i, j, 2) = 0;
@@ -44,33 +60,44 @@ CImg<unsigned char> src("../images/photo.jpg");
       src(i, j, 2) = 255;
     }
   }
+  src.blur(10);
   CImgDisplay main_disp(src);
   while (!main_disp.is_closed()) 
     main_disp.wait();
-  src.save_bmp("test.bmp");
+  src.save("../images/test2.jpg");
 }
 
 void ImageProcess::cellDetect() {
   string srcName = getImageName();
   CImg<unsigned char> src(srcName.c_str());
-  src.blur(15);
   int y = 0;
   ofstream myFile;
   int width = src.width();
   int height = src.height();
   myFile.open("../temp/color_info.txt");
   double blockPixels = width / getNumBlocks();
-  double min_h = blockPixels / 2;
-  double min_w = blockPixels / 2;
+  double min_h = blockPixels / 4;
+  double min_w = blockPixels / 4;
   // loop through each supposed "BOX"
   int numblacksquares = 0;
+  float numSamples = 9;
   for(int j = min_h; j < height; j+=blockPixels) {
     int x = 0;
     for(int i = min_w; i < width; i+=blockPixels) {
-      int r = src(i, j, 0, 0);
-      int g = src(i, j, 0, 1);
-      int b = src(i, j, 0, 2);
-      if (r < MAX_R && g < MAX_G && b < MAX_B) {
+      int r = 0;
+      int g = 0;
+      int b = 0;
+      for(int l = 0; l <= (blockPixels / 2); l += (blockPixels / 4)) {
+        for(int k = 0; k <= (blockPixels / 2); k += (blockPixels / 4)) {
+          r += src(i + l, j + k, 0, 0);
+          g += src(i + l, j + k, 0, 1);
+          b += src(i + l, j + k, 0, 2);
+        }
+      }
+      float rAvg = r / numSamples;
+      float gAvg = g / numSamples;
+      float bAvg = b / numSamples;
+      if (rAvg < 100) {
         numblacksquares++;
         myFile << y << " " << x << " " << 0 << endl;
       } else {
@@ -81,6 +108,7 @@ void ImageProcess::cellDetect() {
     y++;
   }
   myFile.close();
+  cout << numblacksquares << endl;
 }
 
 string ImageProcess::getImageName() {
