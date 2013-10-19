@@ -46,13 +46,12 @@ public class CrosswordMaker extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-        System.out.println("hurdur");
 
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("solution.txt");
-        File file2 = new File("numbers_info.txt");
+        File file = new File("../temp/solution_info.txt");
+        File file2 = new File("../temp/numbers_info.txt");
         ArrayList<Character> letterList = CrosswordMaker.parser(file);
         ArrayList<Character> numberList = CrosswordMaker.parser(file2);
         new CrosswordMaker(letterList,numberList);
