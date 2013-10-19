@@ -14,7 +14,7 @@ make
 ./hack
 rm hack
 
-python execute.py
+python execute2.py
 
 javac Character.java
 javac CrosswordMaker.java
