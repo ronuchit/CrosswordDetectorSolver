@@ -33,7 +33,7 @@ class Executor(object):
 
   def produce_output(self):
     side_length = len(self.b.board)
-    with open("solution_info.txt", "w+") as f:
+    with open("../temp/solution_info.txt", "w+") as f:
       for row in range(side_length):
         for column in range(side_length):
           f.write("%s %s %s\n"%(str(self.b.board[row, column].letter), row, column))

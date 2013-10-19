@@ -44,7 +44,7 @@ public class CrosswordMaker extends JFrame {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("numbers.txt");
+        File file = new File("../temp/solution_info.txt");
         ArrayList<Character> letterList = CrosswordMaker.parser(file);
         ArrayList<Word> wordList = new ArrayList<Word>();
         new CrosswordMaker(letterList);
