@@ -30,9 +30,15 @@ class Executor(object):
     # clue4d = Clue(Board.DOWN, Coordinate(), "Illuminated (2 wds.)")
     # clue5d = Clue(Board.DOWN, Coordinate(), "Boise's state (abbr.)")
 
-    scraper.Scraper().run_scraper([clue1, clue2, clue3, clue4], self.b.board)
-    #solver.Solver(self.b.board, [c1, c2]).solve()
-    #self.produce_output()
+    # scraper.Scraper().run_scraper([clue1, clue2, clue3, clue4], self.b.board)
+    clue1.word_list = ["out"]
+    clue4.word_list = ["limb"]
+    clue8.word_list = ["ato"]
+    clue11.word_list = ["asi"]
+    clue12.word_list = ["idols"]
+    clue14.word_list = ["pol"]
+    solver.Solver(self.b.board, [clue1, clue4, clue8, clue11, clue12, clue14]).solve()
+    self.produce_output()
 
   def create_color_array(self):
     with open("../temp/color_info.txt", "r+") as f:

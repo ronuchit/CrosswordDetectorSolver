@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ $# -ne 3 ] ; then
+if [ $# -ne 2 ] ; then
     echo "Usage: bash $0 [IMAGE_FILE_NAME] [NUM_BLOCKS]"
     exit
 fi

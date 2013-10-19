@@ -1,2 +1,0 @@
-../images/test1.jpg
-15
