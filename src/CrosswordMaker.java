@@ -23,9 +23,11 @@ public class CrosswordMaker extends JFrame {
 
     public static final int VERTICAL = 1;
     public static final int HORIZONTAL = 0;
-    
-    /***
+
+    /**
+     * *
      * Gets a list of characters and prints them to the graph
+     *
      * @param characterList refers to the list of characters.
      */
     public CrosswordMaker(ArrayList<Character> characterList) {
@@ -34,7 +36,7 @@ public class CrosswordMaker extends JFrame {
         Letters letters = new Letters();
         int count = 0;
         for (Character character : characterList) {
-            letters.addLetter(character.getCharacter(),character.getx() * 20, character.gety() * 20);
+            letters.addLetter(character.getCharacter(), character.getx() * 20, character.gety() * 20);
         }
         add(letters);
         pack();
@@ -44,33 +46,37 @@ public class CrosswordMaker extends JFrame {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("../temp/solution_info.txt");
+        File file = new File("solution.txt");
         ArrayList<Character> letterList = CrosswordMaker.parser(file);
-        ArrayList<Word> wordList = new ArrayList<Word>();
         new CrosswordMaker(letterList);
     }
 
     /**
-     * Interprets a file in the format character x y per line. This allows me to generate a list of characters.
+     * Interprets a file in the format character x y per line. This allows me to
+     * generate a list of characters.
+     *
      * @param file
      * @return
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
     public static ArrayList<Character> parser(File file) throws FileNotFoundException, IOException {
-        
+
         ArrayList<Character> letterList = new ArrayList<Character>();
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line = null;
         while ((line = br.readLine()) != null) {
-             String[] a = line.split(" ");
-             letterList.add(new Character(a[0],new Integer(a[1]),new Integer(a[2])));
+            String[] a = line.split(" ");
+            letterList.add(new Character(a[0], new Integer(a[2]), new Integer(a[1])));
         }
-        return letterList;    
+        return letterList;
     }
 }
-/***
+
+/**
+ * *
  * This letters class is to actually paint them on the GUI.
+ *
  * @param letter refers to the letter inserted.
  * @param x_axis takes x values.
  * @param y_axis takes y values.
@@ -85,11 +91,13 @@ class Letters extends JPanel {
     private ArrayList<Integer> x_axis = new ArrayList<Integer>();
     private ArrayList<Integer> y_axis = new ArrayList<Integer>();
 
-    /***
- * This adds a letter.
- * @params: x coordinate, y coordinate, letter.
- * @author Robert
- */
+    /**
+     * *
+     * This adds a letter.
+     *
+     * @params: x coordinate, y coordinate, letter.
+     * @author Robert
+     */
     public void addLetter(String character, int x, int y) {
         letter.add(character);
         x_axis.add(x);
@@ -101,36 +109,39 @@ class Letters extends JPanel {
         return new Dimension(PREF_W, PREF_H);
     }
 
-    /***
- * This algorithm prints the actual picture to the GUI. In the case where a box isn't filled
- * by the end of the function, the box will be filled black.
- * @param g is the graphics interface the program uses.
- * @author Robert
- */
+    /**
+     * *
+     * This algorithm prints the actual picture to the GUI. In the case where a
+     * box isn't filled by the end of the function, the box will be filled
+     * black.
+     *
+     * @param g is the graphics interface the program uses.
+     * @author Robert
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         this.setFont(new Font("TimesRoman", Font.BOLD, 20));
         Graphics2D g2 = (Graphics2D) g;
-        System.out.println(letter.size());
+        
         for (int i = 0; i < letter.size(); i++) {
-            squares[x_axis.get(i) / 20][ y_axis.get(i) / 20] = 1;
-	    if(letter.get(i) == "None"){
-		continue;
-	    }
-            g.setColor(Color.RED);
-            g2.drawString(letter.get(i), x_axis.get(i) + 2, y_axis.get(i) + 20);
+            //if black.
+            if(letter.get(i).equals("black")){
+                System.out.println(y_axis.get(i));
+                g2.setColor(Color.BLACK);
+                g2.fillRect(x_axis.get(i), y_axis.get(i), 20, 20);
+                continue;
+            }
             g.setColor(Color.BLACK);
             Rectangle r = new Rectangle(x_axis.get(i), y_axis.get(i), 20, 20);
-            g2.draw(r);
-        }
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
-                if (squares[i][j] == 0) {
-                    g2.fillRect(i * 20, j * 20, 20, 20);
-                }
+                        g2.draw(r);
+            squares[x_axis.get(i) / 20][ y_axis.get(i) / 20] = 1;
+            //if empty
+            if(letter.get(i).equals("None")){
+                continue;
             }
+            g2.setColor(Color.RED);
+            g2.drawString(letter.get(i), x_axis.get(i) + 2, y_axis.get(i) + 20);
         }
-
     }
 }
