@@ -22,7 +22,7 @@ void ImageProcess::cellDetect() {
   setImageName(temp.c_str());
   getline(infile, temp);
   setNumBlocks(atoi(temp.c_str()));
-  string srcName = "../images/" + getImageName();
+  string srcName = getImageName();
   CImg<unsigned char> src(srcName.c_str());
   src.blur(15);
   int y = 0;

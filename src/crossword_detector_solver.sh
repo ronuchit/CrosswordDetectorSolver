@@ -16,8 +16,8 @@ rm hack
 
 python execute.py
 
-# javac Character.java
-# javac CrosswordMaker.java
-# java CrosswordMaker
+javac Character.java
+javac CrosswordMaker.java
+java CrosswordMaker
 
 rm -r ../temp
