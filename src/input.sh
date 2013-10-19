@@ -5,13 +5,15 @@ if [ $# -ne 3 ] ; then
     exit
 fi
 
-echo $1 > puzzle_info.txt
-echo $2 >> puzzle_info.txt
-echo $3 >> puzzle_info.txt
+mkdir ../temp
+echo $1 > ../temp/puzzle_info.txt
+echo $2 >> ../temp/puzzle_info.txt
+echo $3 >> ../temp/puzzle_info.txt
 
 # call C++ puzzle processor
 make
 ./hack
 
-# call Python top-level function
 python execute.py
+
+rm -r ../temp
