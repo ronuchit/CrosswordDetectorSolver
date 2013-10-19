@@ -6,8 +6,6 @@ import numpy as np
 
 BLACK = 0
 WHITE = 1
-RIGHT = 0
-DOWN = 1
 
 class Board(object):
   def __init__(self, color_arr):
