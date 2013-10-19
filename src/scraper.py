@@ -9,12 +9,13 @@ import numpy
 #take in clue, length of answer
 
 class Scraper(object):
-  def run_scraper(self, clues, board):
-    for c in clues:
-      if c.direction == Board.ACROSS:
-        l = board[c.coord.x, c.coord.y].right_length
-      if c.direction == Board.DOWN:
-      	l = board[c.coord.x, c.coord.y].down_length
+	def run_scraper(self, clues, board):
+		for c in clues:
+			if c.direction == Board.ACROSS:
+				l = board[c.coord.x, c.coord.y].right_length
+			if c.direction == Board.DOWN:
+				l = board[c.coord.x, c.coord.y].down_length
+			print(l)
 			self.get_answers(c, l)
 
 	def get_answers(self, clue, length):
@@ -103,4 +104,5 @@ class Scraper(object):
 				if new_str[i]=="'":
 					new_str = new_str[0:i] + "%27" + new_str[i+1:]
 				i = i + 1
+		print(new_str)
 		return new_str
