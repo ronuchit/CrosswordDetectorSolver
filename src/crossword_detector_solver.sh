@@ -12,7 +12,12 @@ echo $2 >> ../temp/puzzle_info.txt
 # call C++ puzzle processor
 make
 ./hack
+rm hack
 
 python execute.py
+
+# javac Character.java
+# javac CrosswordMaker.java
+# java CrosswordMaker
 
 rm -r ../temp
