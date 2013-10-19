@@ -15,6 +15,8 @@ class Scraper(object):
 				l = board[c.coord.x, c.coord.y].right_length
 			if c.direction == Board.DOWN:
 				l = board[c.coord.x, c.coord.y].down_length
+			if l == None:
+				print("Length is not being calculated correctly")
 			self.get_answers(c, l)
 
 	def get_answers(self, clue, length):
