@@ -59,6 +59,9 @@ class Executor(object):
             f.write("black %s %s\n"%(row, column))
           else:
             f.write("%s %s %s\n"%(str(self.b.board[row, column].letter), row, column))
+    with open("../temp/numbers_info.txt", "w+") as f:
+      for num, coord in self.b.numbers_dict.items():
+        f.write("%s %s %s\n"%(num, coord.x, coord.y))
   
 if __name__ == "__main__":
   Executor().execute()
