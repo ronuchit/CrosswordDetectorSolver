@@ -3,16 +3,16 @@
 # Internal representation of the board, as a 2D array of Blocks.
 
 import numpy as np
-
-BLACK = 0
-WHITE = 1
+import coordinate
 
 class Board(object):
+  BLACK = 0
+  WHITE = 1
   def __init__(self, color_arr):
     self.color_arr = color_arr
     self.side_length = np.shape(self.color_arr)[0]
     self.construct_board()
-    self.print_board()
+    # self.print_board()
 
   def construct_board(self):
     # creates self.board and self.numbers_dict (key: number, value: Coordinate object)
@@ -22,22 +22,22 @@ class Board(object):
     
     for row in range(self.side_length):
       for column in range(self.side_length):
-        if color_arr[row, column] == BLACK:
-          board[row, column] = Block(BLACK, right_length=None, down_length=None)
+        if color_arr[row, column] == Board.BLACK:
+          board[row, column] = Block(Board.BLACK, right_length=None, down_length=None)
         elif (row == 0 and column == 0) or \
               (board[row-1, column] is not None and \
-                 board[row-1, column].color == BLACK and \
+                 board[row-1, column].color == Board.BLACK and \
                  board[row, column-1] is not None and \
-                 board[row, column-1].color == BLACK):
-          numbers_dict[curr_num] = Coordinate(row, column)
+                 board[row, column-1].color == Board.BLACK):
+          numbers_dict[curr_num] = coordinate.Coordinate(row, column)
           curr_num += 1
           board[row, column] = self._construct_beginning_block(row, column, do_right=True, do_down=True)
-        elif row == 0 or board[row-1, column].color == BLACK:
-          numbers_dict[curr_num] = Coordinate(row, column)
+        elif row == 0 or board[row-1, column].color == Board.BLACK:
+          numbers_dict[curr_num] = coordinate.Coordinate(row, column)
           curr_num += 1
           board[row, column] = self._construct_beginning_block(row, column, do_right=False, do_down=True)
-        elif column == 0 or board[row, column-1].color == BLACK:
-          numbers_dict[curr_num] = Coordinate(row, column)
+        elif column == 0 or board[row, column-1].color == Board.BLACK:
+          numbers_dict[curr_num] = coordinate.Coordinate(row, column)
           curr_num += 1
           board[row, column] = self._construct_beginning_block(row, column, do_right=True, do_down=False)
         else:
@@ -61,7 +61,7 @@ class Board(object):
     if do_right:
       right_length = 0
       count = column
-      while count < self.side_length and self.color_arr[row, count] == WHITE:
+      while count < self.side_length and self.color_arr[row, count] == Board.WHITE:
         count += 1;
         right_length += 1;
     else:
@@ -70,7 +70,7 @@ class Board(object):
     if do_down:
       down_length = 0
       count = row
-      while count < self.side_length and self.color_arr[count, column] == WHITE:
+      while count < self.side_length and self.color_arr[count, column] == Board.WHITE:
         count += 1;
         down_length += 1;
     else:
@@ -88,14 +88,6 @@ class Block(object):
               
   def __repr__(self):
     return "color: %s; right_length: %s; down_length: %s"%(self.color, str(self.right_length), str(self.down_length))
-
-class Coordinate(object):
-  def __init__(self, x, y):
-    self.x = x
-    self.y = y
-
-  def __repr__(self):
-    return "(x, y) = (%d, %d)"%(self.x, self.y)
 
 if __name__ == "__main__":
   color_arr = np.array([[1, 1, 1, 0, 0], [1, 1, 1, 0, 1], [1, 1, 1, 0, 1], [1, 1, 1, 1, 1], [0, 0, 0, 1, 1]])
