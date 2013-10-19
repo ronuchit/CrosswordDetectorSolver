@@ -1,8 +1,10 @@
 # scraper.py
 from bs4 import BeautifulSoup
+from clue import *
+from board import *
 import re
 import urllib2
-#import numpy
+import numpy
 
 #take in clue, length of answer
 
@@ -61,8 +63,7 @@ def get_answers(clue, length):
 					if (data not in toReturn):
 						toReturn.append(data)
 			i = i + 1
-	toReturn = {original_clue: toReturn}
-	return toReturn
+	original_clue.word_list = toReturn
 
 def url_to_soup(url):
 	""" Open site and soupify """
@@ -103,3 +104,18 @@ def check_clue(clue):
 # print(get_answers("askld 9823kl&(@*&@$&", 3))
 # print(get_answers("'...good night' (2 wds.)", 4))
 # print(get_answers("'Do __ say!' (2 wds.)", 3))
+# print(get_answers("__-B (toothbrush brand)", 4))
+
+if __name__ == "__main__":
+	clue1 = Clue(Board.RIGHT, Coordinate(0,0), "Ump's call")
+	clue2 = Clue(Board.RIGHT, Coordinate(0,4), "Branch")
+	clue3 = Clue(Board.RIGHT, Coordinate(0,10), "From __ Z (2 wds.)")
+	clue4 = Clue(Board.RIGHT, Coordinate(1, 0), "'__ was saying...' (2 wds.)")
+	get_answers(clue1, 3)
+	get_answers(clue2, 4)
+	get_answers(clue3, 3)
+	get_answers(clue4, 3)
+	print(clue1.word_list)
+	print(clue2.word_list)
+	print(clue3.word_list)
+	print(clue4.word_list)
