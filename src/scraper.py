@@ -70,12 +70,12 @@ class Scraper(object):
 			i = 0;
 			while (i < len(stuff)):
 				data = stuff[i].contents[0]
-				if (len(data)==length | len(data)==(length-1)):
+				if ((len(data)==length) | (len(data)==(length-1))):
 					if (regex.match(data)):
 						if (data not in toReturn):
 							if clue[-1] == 's':
 								if (len(data)==length-1):
-									toReturn.append(data+"s")
+									toReturn.append(data+"S")
 								else:
 									toReturn.append(data)
 							elif (len(data)==length):
