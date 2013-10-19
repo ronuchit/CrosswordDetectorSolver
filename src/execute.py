@@ -1,10 +1,18 @@
 #! /usr/bin/python
 
+<<<<<<< Updated upstream
 import board
 import scraper
 import solver
 import clue
 import coordinate
+=======
+from board import *
+from scraper import *
+from solver import *
+from clue import *
+from coordinate import *
+>>>>>>> Stashed changes
 import numpy as np
 from math import sqrt
 
@@ -14,6 +22,7 @@ class Executor(object):
     self.b = board.Board(self.color_array)
 
   def execute(self):
+<<<<<<< Updated upstream
     clue1 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(3,0), "Ump's call")
     clue4 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(0,0), "Branch")
     clue8 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(6,12), "From __ Z (2 wds.)")
@@ -31,6 +40,25 @@ class Executor(object):
     # clue5d = Clue(Board.DOWN, Coordinate(), "Boise's state (abbr.)")
 
     scraper.Scraper().run_scraper([clue1, clue2, clue3, clue4], self.b.board)
+=======
+    clue1 = Clue(Board.ACROSS, Coordinate(3,0), "Ump's call")
+    clue4 = Clue(Board.ACROSS, Coordinate(0,0), "Branch")
+    clue8 = Clue(Board.ACROSS, Coordinate(6,12), "From __ Z (2 wds.)")
+    clue11 = Clue(Board.ACROSS, Coordinate(8,0), '"__ was saying..." (2 wds.)')
+    clue12 = Clue(Board.ACROSS, Coordinate(0,5), "Teens' heroes")
+    clue14 = Clue(Board.ACROSS, Coordinate(), "Candidate, for short")
+    clue15 = Clue(Board.ACROSS, Coordinate(), "Opposite of masc.")
+    clue16 = Clue(Board.ACROSS, Coordinate(), "Arranged in rows and columns")
+    clue18 = Clue(Board.ACROSS, Coordinate(), "Promissory Note")
+
+    clue1d = Clue(Board.DOWN, Coordinate(), "Lout")
+    clue2d = Clue(Board.DOWN, Coordinate(), "Application")
+    clue3d = Clue(Board.DOWN, Coordinate(), "Shyness")
+    clue4d = Clue(Board.DOWN, Coordinate(), "Illuminated (2 wds.)")
+    clue5d = Clue(Board.DOWN, Coordinate(), "Boise's state (abbr.)")
+
+    Scraper().run_scraper([clue1, clue2, clue3, clue4], self.b.board)
+>>>>>>> Stashed changes
     #solver.Solver(self.b.board, [c1, c2]).solve()
     #self.produce_output()
 
