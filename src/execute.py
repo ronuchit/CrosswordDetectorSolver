@@ -20,17 +20,22 @@ class Executor(object):
     clue11 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(8,0), '"__ was saying..." (2 wds.)')
     clue12 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(0,5), "Teens' heroes")
     clue14 = clue.Clue(board.Board.ACROSS, coordinate.Coordinate(11,12), "Candidate, for short")
+    
     # clue15 = Clue(Board.ACROSS, Coordinate(), "Opposite of masc.")
     # clue16 = Clue(Board.ACROSS, Coordinate(), "Arranged in rows and columns")
     # clue18 = Clue(Board.ACROSS, Coordinate(), "Promissory Note")
 
-    # clue1d = Clue(Board.DOWN, Coordinate(), "Lout")
-    # clue2d = Clue(Board.DOWN, Coordinate(), "Application")
-    # clue3d = Clue(Board.DOWN, Coordinate(), "Shyness")
-    # clue4d = Clue(Board.DOWN, Coordinate(), "Illuminated (2 wds.)")
-    # clue5d = Clue(Board.DOWN, Coordinate(), "Boise's state (abbr.)")
+    clue1d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,3), "Lout")
+    clue2d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,8), "Application")
+    # clue3d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(), "Shyness")
+    clue4d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,6), "Illuminated (2 wds.)")
+    clue5d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,9), "Boise's state (abbr.)")
+    clue6d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,0), "Throngs")
+    clue7d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,2), '"__ Skies"')
+    #clue8d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,0), "Throngs")
+    clue13d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(4,8), "Sports pants")
 
-    scraper.Scraper().run_scraper([clue1, clue2, clue3, clue4], self.b.board)
+    scraper.Scraper().run_scraper([clue1d, clue2d, clue4d, clue5d, clue6d, clue7d, clue13d], self.b.board)
     #solver.Solver(self.b.board, [c1, c2]).solve()
     #self.produce_output()
 
