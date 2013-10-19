@@ -15,9 +15,8 @@ ImageProcess::ImageProcess() {
 
 int main() {
   ImageProcess ip = ImageProcess();
-  ip.preprocess();
   ip.readFile();
-  ip.cellDetect();
+  ip.preprocess();
 }
 
 void ImageProcess::readFile() {
@@ -32,10 +31,7 @@ void ImageProcess::readFile() {
 }
 
 void ImageProcess::preprocess() {
-  CImg<unsigned char> backup("../images/test3.jpg");
-  backup.save("../images/test2.jpg");
-  CImg<unsigned char> src("../images/test2.jpg");
-  src.save("../images/test3.jpg");
+  CImg<unsigned char> src(getImageName().c_str());
   int r = 0;
   int g = 0;
   int b = 0;
@@ -61,10 +57,49 @@ void ImageProcess::preprocess() {
     }
   }
   src.blur(10);
+  /* TESTING PURPOSES 
   CImgDisplay main_disp(src);
   while (!main_disp.is_closed()) 
     main_disp.wait();
-  src.save("../images/test2.jpg");
+  */
+  int y = 0;
+  ofstream myFile;
+  int width = src.width();
+  int height = src.height();
+  myFile.open("../temp/color_info.txt");
+  double blockPixels = width / getNumBlocks();
+  double min_h = blockPixels / 4;
+  double min_w = blockPixels / 4;
+  // loop through each supposed "BOX"
+  int numblacksquares = 0;
+  float numSamples = 9;
+  for(int j = min_h; j < height; j+=blockPixels) {
+    int x = 0;
+    for(int i = min_w; i < width; i+=blockPixels) {
+      int r = 0;
+      int g = 0;
+      int b = 0;
+      for(int l = 0; l <= (blockPixels / 2); l += (blockPixels / 4)) {
+        for(int k = 0; k <= (blockPixels / 2); k += (blockPixels / 4)) {
+          r += src(i + l, j + k, 0, 0);
+          g += src(i + l, j + k, 0, 1);
+          b += src(i + l, j + k, 0, 2);
+        }
+      }
+      float rAvg = r / numSamples;
+      float gAvg = g / numSamples;
+      float bAvg = b / numSamples;
+      if (rAvg < 100) {
+        numblacksquares++;
+        myFile << y << " " << x << " " << 0 << endl;
+      } else {
+        myFile << y << " " << x << " " << 1 << endl;
+      }
+      x++;
+    }
+    y++;
+  }
+  myFile.close();
 }
 
 void ImageProcess::cellDetect() {

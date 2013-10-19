@@ -20,4 +20,6 @@ javac Character.java
 javac CrosswordMaker.java
 java CrosswordMaker
 
+read -p "Press enter to quit"
+
 rm -r ../temp
