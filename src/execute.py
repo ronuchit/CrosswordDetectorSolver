@@ -35,9 +35,18 @@ class Executor(object):
     #clue8d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(0,0), "Throngs")
     clue13d = clue.Clue(board.Board.DOWN, coordinate.Coordinate(4,8), "Sports pants")
 
-    scraper.Scraper().run_scraper([clue1d, clue2d, clue4d, clue5d, clue6d, clue7d, clue13d], self.b.board)
+    #scraper.Scraper().run_scraper([clue1d, clue2d, clue4d, clue5d, clue6d, clue7d, clue13d], self.b.board)
     #solver.Solver(self.b.board, [c1, c2]).solve()
     #self.produce_output()
+    # scraper.Scraper().run_scraper([clue1, clue2, clue3, clue4], self.b.board)
+    # clue1.word_list = ["out"]
+    # clue4.word_list = ["limb"]
+    # clue8.word_list = ["ato"]
+    # clue11.word_list = ["asi"]
+    # clue12.word_list = ["idols"]
+    # clue14.word_list = ["pol"]
+    # solver.Solver(self.b.board, [clue1, clue4, clue8, clue11, clue12, clue14]).solve()
+    # self.produce_output()
 
   def create_color_array(self):
     with open("../temp/color_info.txt", "r+") as f:

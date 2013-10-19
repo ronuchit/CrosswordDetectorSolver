@@ -36,7 +36,7 @@ public class CrosswordMaker extends JFrame {
         Letters letters = new Letters();
         int count = 0;
         for (Character character : characterList) {
-            letters.addLetter(character.getCharacter(), character.getx() * 20, character.gety() * 20);
+            letters.addLetter(character.getCharacter(), character.getx() * 30, character.gety() * 30);
         }
         add(letters);
         pack();
@@ -46,7 +46,7 @@ public class CrosswordMaker extends JFrame {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("solution.txt");
+        File file = new File("../temp/solution_info.txt");
         ArrayList<Character> letterList = CrosswordMaker.parser(file);
         new CrosswordMaker(letterList);
     }
@@ -121,27 +121,26 @@ class Letters extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        this.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        this.setFont(new Font("TimesRoman", Font.BOLD, 30));
         Graphics2D g2 = (Graphics2D) g;
         
         for (int i = 0; i < letter.size(); i++) {
             //if black.
             if(letter.get(i).equals("black")){
-                System.out.println(y_axis.get(i));
                 g2.setColor(Color.BLACK);
-                g2.fillRect(x_axis.get(i), y_axis.get(i), 20, 20);
+                g2.fillRect(x_axis.get(i), y_axis.get(i), 30, 30);
                 continue;
             }
             g.setColor(Color.BLACK);
-            Rectangle r = new Rectangle(x_axis.get(i), y_axis.get(i), 20, 20);
+            Rectangle r = new Rectangle(x_axis.get(i), y_axis.get(i), 30, 30);
                         g2.draw(r);
-            squares[x_axis.get(i) / 20][ y_axis.get(i) / 20] = 1;
+            squares[x_axis.get(i) / 30][ y_axis.get(i) / 30] = 1;
             //if empty
             if(letter.get(i).equals("None")){
                 continue;
             }
             g2.setColor(Color.RED);
-            g2.drawString(letter.get(i), x_axis.get(i) + 2, y_axis.get(i) + 20);
+            g2.drawString(letter.get(i), x_axis.get(i) + 4, y_axis.get(i) + 26);
         }
     }
 }
