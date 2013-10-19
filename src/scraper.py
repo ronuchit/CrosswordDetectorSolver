@@ -15,7 +15,6 @@ class Scraper(object):
 				l = board[c.coord.x, c.coord.y].right_length
 			if c.direction == Board.DOWN:
 				l = board[c.coord.x, c.coord.y].down_length
-			print(l)
 			self.get_answers(c, l)
 
 	def get_answers(self, clue, length):
@@ -104,5 +103,4 @@ class Scraper(object):
 				if new_str[i]=="'":
 					new_str = new_str[0:i] + "%27" + new_str[i+1:]
 				i = i + 1
-		print(new_str)
 		return new_str
