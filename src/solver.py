@@ -16,7 +16,12 @@ class Solver(object):
     self.clues = clues
     self.longer_clues = []
     self.num_remaining = len(self.clues)
-    self.longer_clues = filter(lambda c: len(c.word_list) > 1, self.clues)
+    for c in self.clues:
+      if len(c.word_list) > 1:
+        self.longer_clues.append(c)
+      elif c.word_list == 0:
+        print("No answers for clue %s; ignoring"%c.clue_str)
+        self.num_remaining -= 1
     
   def solve(self):
     self.fill_guarantees()
