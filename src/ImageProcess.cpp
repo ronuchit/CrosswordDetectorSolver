@@ -23,7 +23,6 @@ void ImageProcess::readFile() {
   setImageName(temp.c_str());
   getline(infile, temp);
   setNumBlocks(atoi(temp.c_str()));
-
 }
 
 void ImageProcess::preprocess() {
