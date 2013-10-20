@@ -1,1 +1,0 @@
-// render_solved_puzzle.java
