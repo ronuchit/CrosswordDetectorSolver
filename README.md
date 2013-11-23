@@ -1,6 +1,6 @@
-Hack project for CSUA Hackathon Fall 2013.
 CrosswordDetectorSolver
 =======================
+Hack project for CSUA Hackathon Fall 2013.
 //===============================//
 // Authors
 //===============================//
