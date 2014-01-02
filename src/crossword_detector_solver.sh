@@ -16,6 +16,7 @@ rm hack
 
 python execute.py
 
+echo "Press <Ctrl-C> to exit GUI"
 javac Character.java
 javac CrosswordMaker.java
 java CrosswordMaker
