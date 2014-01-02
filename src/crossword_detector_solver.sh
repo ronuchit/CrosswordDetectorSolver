@@ -22,4 +22,4 @@ java CrosswordMaker
 
 read -p "Press enter to quit"
 
-rm -r ../temp
+# rm -r ../temp
