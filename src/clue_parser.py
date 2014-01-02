@@ -61,9 +61,9 @@ def make_clues(str_list, num_list, down_start, board):
   down_lst = [6, 7, 8, 13, 16, 26, 27]
   for i in range(len(str_list)):
     if i < down_start and int(num_list[i]) in across_lst:
-      toReturn.append(clue.Clue(board.ACROSS, board.numbers_dict[int(num_list[i])], str_list[i]))
+      toReturn.append(clue.Clue(board.Board.ACROSS, board.numbers_dict[int(num_list[i])], str_list[i]))
     elif i >= down_start and int(num_list[i]) in down_lst:
-      toReturn.append(clue.Clue(board.DOWN, board.numbers_dict[int(num_list[i])], str_list[i]))
+      toReturn.append(clue.Clue(board.Board.DOWN, board.numbers_dict[int(num_list[i])], str_list[i]))
   return toReturn
 
 if __name__ == "__main__": 
